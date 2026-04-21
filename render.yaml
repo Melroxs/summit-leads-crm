@@ -1,0 +1,61 @@
+services:
+  - type: web
+    name: summit-leads-api
+    runtime: node
+    rootDir: .
+    buildCommand: npm install && npm run build --workspace @crm/shared && npm run build --workspace @crm/api
+    startCommand: npm run start --workspace @crm/api
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: NEXT_PUBLIC_API_BASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: TELNYX_API_KEY
+        sync: false
+      - key: TELNYX_CONNECTION_ID
+        sync: false
+      - key: TELNYX_APP_ID
+        sync: false
+      - key: TELNYX_SIP_USERNAME
+        sync: false
+      - key: TELNYX_SIP_PASSWORD
+        sync: false
+      - key: TELNYX_API_BASE_URL
+        value: https://api.telnyx.com/v2
+      - key: TELNYX_PUBLIC_KEY
+        sync: false
+      - key: TELNYX_STATUS_CALLBACK_URL
+        sync: false
+      - key: MEDIA_STREAM_WS_URL
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+
+  - type: web
+    name: summit-leads-web
+    runtime: node
+    rootDir: .
+    buildCommand: npm install && npm run build --workspace @crm/web
+    startCommand: npm run start --workspace @crm/web
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: NEXT_PUBLIC_API_BASE_URL
+        sync: false
+
